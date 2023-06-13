@@ -23,12 +23,12 @@
 function main() {
   const parent = 'projects/bigquery-demo-387504'
   const transferConfig = {
-    displayName: `s3-transfer-01`,
+    displayName: "s3-transfer-01",
+    dataSourceId: "amazon_s3",
     destinationDatasetId: "bigquery-demo-387504.s3_data",   // dest dataset name
-    datasetRegion: "asia-northeast3",
     scheduleOptions: {
         disableAutoScheduling: true
-    }
+    },
   }
 
   // Imports the Datatransfer library
