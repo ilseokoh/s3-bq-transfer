@@ -5,8 +5,10 @@
 [Amazon S3 전송](https://cloud.google.com/bigquery/docs/s3-transfer?hl=ko)
 
 ## 준비작업
+전체 실행은 Google Cloud Shell 에서 실행 추천. 
 
-### 1. install aws cli [참고](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+### 1. install aws cli 
+[참고문서](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
 aws s3 ls s3://bucketname 명령으로 prefix를 가져오는 명령을 실행하기 위해 설치
 ```
@@ -76,6 +78,12 @@ Table 'bigquery-demo-387504:s3_data.table4' successfully created.
 Transfer configuration 'projects/537301467034/locations/asia-northeast3/transferConfigs/6485cf0c-0000-2f74-8284-3c286d3543e2' successfully created.
 ```
 
+![BQ 테이블](images/result.png)
+
+![Transfer 결과](images/transfer_result.png)
+
+
+
 ## Trouble Shoting 
 
 ### 이런 Warning 이 발생하는데 무시. 
@@ -84,7 +92,7 @@ Transfer configuration 'projects/537301467034/locations/asia-northeast3/transfer
   import pipes
 ```
 
-### Auth를 다시하라는 메시자와 함께 멈춤 
+### Auth를 다시하라는 메시지와 함께 멈춤 
 gcloud auth login 을 했음에도 실행 중간 (특히 tranfer를 만들때) URL을 웹 브라우저에 넣고 version_info를 요구할 때 
 **하라는 데로 URL에 접속해서 로그인하고 나온 결과 token을 입력**
 ```
