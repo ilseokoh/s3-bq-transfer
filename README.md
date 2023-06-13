@@ -78,9 +78,11 @@ Table 'bigquery-demo-387504:s3_data.table4' successfully created.
 Transfer configuration 'projects/537301467034/locations/asia-northeast3/transferConfigs/6485cf0c-0000-2f74-8284-3c286d3543e2' successfully created.
 ```
 
-![BQ 테이블](images/result.png)
-
+Transfer 가 생성되고 자동실행 됩니다. 기본값을 24시간에 한번 실행되면서 변경된 내용을 다시 전송합니다. 
 ![Transfer 결과](images/transfer_result.png)
+
+BigQuery에 테이블이 생성되었습니다. 
+![BQ 테이블](images/result.png)
 
 ## S3 의 구조가 2 Depth인 경우 setup-2depth.sh 사용
 S3가 아래와 같은 구조로 2 Depth 인 경우
