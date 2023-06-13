@@ -6,11 +6,13 @@ DATASET=
 AWS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 
-table_arr=($(aws s3 ls s3://$AWS_BUCKET_NAME/ | awk '{if ($1 == "PRE") print $2}'))
+PREFIX_DEPTH_1=abc
+
+table_arr=($(aws s3 ls s3://$AWS_BUCKET_NAME/$PREFIX_DEPTH_1/ | awk '{if ($1 == "PRE") print $2}'))
 declare -p table_arr
 for i in "${table_arr[@]}"
 do
-    table_name=$(echo "$i" | sed 's:/*$::')
+    table_name=$(echo "$i" | sed 's:/*$::')  # remove slash
     echo "Create $table_name .... "
 
     # create Bigquery Table
@@ -28,7 +30,7 @@ do
         --display_name=$table_name \
         --target_dataset=s3_data \
         --params='{
-            "data_path":"s3://'"$AWS_BUCKET_NAME"'/'"$table_name"'/*",
+            "data_path":"s3://'"$AWS_BUCKET_NAME"'/'"$PREFIX_DEPTH_1"'/'"$table_name"'/*",
             "destination_table_name_template":"'"$table_name"'",
             "file_format":"PARQUET",
             "write_disposition":"WRITE_APPEND",

@@ -82,6 +82,37 @@ Transfer configuration 'projects/537301467034/locations/asia-northeast3/transfer
 
 ![Transfer 결과](images/transfer_result.png)
 
+## S3 의 구조가 2 Depth인 경우 setup-2depth.sh 사용
+S3가 아래와 같은 구조로 2 Depth 인 경우
+```
+aws s3 ls s3://$AWS_BUCKET_NAME --recursive
+2023-06-13 19:31:04          0 abc/
+2023-06-13 19:31:25          0 abc/table1/
+2023-06-13 19:31:25    8178020 abc/table1/part-00000-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:25    8184929 abc/table1/part-00001-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:25    8188552 abc/table1/part-00002-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:25    8184704 abc/table1/part-00003-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:25          0 abc/table2/
+2023-06-13 19:31:25    8168560 abc/table2/part-00004-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:25    8186276 abc/table2/part-00005-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:25    8186842 abc/table2/part-00006-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:25    8180305 abc/table2/part-00007-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:25    8179586 abc/table2/part-00008-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:10          0 def/
+2023-06-13 19:31:49          0 def/table3/
+2023-06-13 19:31:49    8184260 def/table3/part-00009-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:49    8174556 def/table3/part-00010-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:49    8171939 def/table3/part-00011-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:49    8184096 def/table3/part-00012-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:49          0 def/table4/
+2023-06-13 19:31:49    8186224 def/table4/part-00013-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:49    8197825 def/table4/part-00014-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:49    8192127 def/table4/part-00015-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+2023-06-13 19:31:49    8184263 def/table4/part-00016-68edc39c-2b84-4c9d-a7f7-6820148e7d46-c000.snappy.parquet
+```
+
+setup-2depth.sh 코드에서 PREFIX_DEPTH_1 확인
+
 
 
 ## Trouble Shoting 
