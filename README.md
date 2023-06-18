@@ -272,7 +272,8 @@ gcloud services enable bigquery.googleapis.com
 aws configure
 ```
 
-### 5. BigQuery에 데이터셋 생성 [참고문서](https://cloud.google.com/bigquery/docs/datasets?hl=ko)
+### 5. BigQuery에 데이터셋 생성 
+[참고문서](https://cloud.google.com/bigquery/docs/datasets?hl=ko)
 aws-ap-northeast-2 (seoul) 지역에 BigQuery Dataset 생성
 
 ### 7. 스크립트 준비 
@@ -295,4 +296,55 @@ PREFIX_DEPTH_1=     # 첫번째 폴더 이름
 
 ```
 ./s3-bq-omni.sh
+```
+
+# 4. GCS에서 BigQuery로 데이터 로드 (native table)
+
+## 참고문서 
+[Cloud Storage에서 Parquet 데이터 로드](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet?hl=ko)
+
+## 사전준비 
+
+### 1. gcloud login 
+사용자는 bigquery/Admin IAM role 이 필요하다. 
+```
+gcloud auth login
+```
+### 2. 프로젝트 지정 및 API 사용 설정
+```
+gcloud projects list
+
+gcloud config set project PROJECT_ID
+
+gcloud services enable bigquery.googleapis.com
+```
+
+### 5. BigQuery에 데이터셋 생성 
+[참고문서](https://cloud.google.com/bigquery/docs/datasets?hl=ko)
+
+### 7. 스크립트 준비 
+```
+git clone https://github.com/ilseokoh/s3-bq-transfer.git
+chmod +x gcs-bq-native.sh
+```
+
+### 8. s3-bq-omni.sh 스크립트 상단에 변수 셋업
+
+```bash
+BQ_DATASET=         # 생성한 BQ 데이터셋 이름
+FORMAT=             # 원본 포멧: PARQUET
+AWS_BUCKET_NAME=    # AWS 버킷 이름
+CONNECTION_ID=      # BigQuery Omni Connection id
+PREFIX_DEPTH_1=     # 첫번째 폴더 이름
+
+PROJECT_ID=         # 프로젝트 ID
+GCS_BUCKET_NAME=    # GCS 버킷 이름
+DATASET=            # 생성한 BQ 데이터셋 이름
+PREFIX_DEPTH_1=     # 첫번째 폴더 이름
+```
+
+## 실행 
+
+```
+./gcs-bq-native.sh
 ```
