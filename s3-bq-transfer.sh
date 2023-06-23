@@ -22,7 +22,6 @@ do
 
     # create Bigquery Table
     bq mk \
-    --expiration 3600 \
     --table \
     --description "s3 2 bq table" \
     $PROJECT_ID:$DATASET.$table_name
